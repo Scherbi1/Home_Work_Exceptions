@@ -1,47 +1,56 @@
 public class Main {
     public static void main(String[] args) {
-        enterProgram("Java_student", "qwerqwer", "qwerqwer");
-        System.out.println(3);
+        enterProgram("Java_studendйй", "qwerqwer", "qwerqwer");
     }
-
     public static void enterProgram(String login, String password, String confirmPassword) {
-
+        boolean bool=true;
         try {
-            checkPassword(login, password, confirmPassword);
-            checklogin(login, password, confirmPassword);
+            checkPassword( password, confirmPassword);
+            checklogin(login);
         } catch (WrongLoginException e) {
-            throw new WrongLoginException();
+           bool=false;
+            throw new WrongLoginException() ;
         } catch (WrongPasswordException e) {
+            bool=false;
             throw new WrongPasswordException();
-        /*}finally{
-            System.out.println("пароль введен неверно!!!. Попробуйте заново!!!");
-            }*/
+       } finally {
+            if (bool){
+                System.out.println("Вход успешно выполнен!!!");
+            } else {
+                System.out.println("Попробуйте снова!!!");
+            }
         }
-    }
+        }
 
-    public static void checkPassword(String login, String password, String confirmPassword) throws WrongPasswordException {
+    public static boolean checkPassword( String password, String confirmPassword) throws WrongPasswordException {
+        char[] arr = password.toCharArray();
         if (password.length() > 20 || password.equals(confirmPassword) == false) {
             throw new WrongPasswordException();
         }
+        for (int j = 0; j < arr.length; j++){
+          if (arr[j]>='A'&& arr[j]<='Z'||arr[j]>='a'&& arr[j]<='z'||arr[j]=='_'||arr[j]>='0' &&arr[j]<='9') {
+            }else {
+              throw new WrongPasswordException();
+          }
+        }
+        return false;
     }
 
-    public static void checklogin(String login, String password, String confirmPassword) throws WrongLoginException {
+
+    public static boolean checklogin(String login) throws WrongLoginException {
+      //  boolean bool=true;
         char[] arr = login.toCharArray();
         if (login.length() > 20) {
             throw new WrongLoginException();
         }
-        for (int i = 0; i < arr.length; i++) {
-            for (char ch = 'А'; ch <= 'Я'; ch++) {
-                if (arr[i] == ch) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j]>='A'&& arr[j]<='Z'||arr[j]>='a'&& arr[j]<='z'||arr[j]=='_' ) {
+                }else {
+
                     throw new WrongLoginException();
                 }
             }
-            for (char ch = 'а'; ch <= 'я'; ch++) {
-                if (arr[i] == ch) {
-                    throw new WrongLoginException();
-                }
-            }
-        }
+         return false;
     }
 }
 
