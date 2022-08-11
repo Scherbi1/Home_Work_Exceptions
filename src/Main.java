@@ -9,10 +9,10 @@ public class Main {
             checklogin(login);
         } catch (WrongLoginException e) {
            bool=false;
-            throw new WrongLoginException() ;
+            System.out.println("Логин неверный!!!"); ;
         } catch (WrongPasswordException e) {
             bool=false;
-            throw new WrongPasswordException();
+            System.out.println("Пароль неверный или не совпадают!!!");;
        } finally {
             if (bool){
                 System.out.println("Вход успешно выполнен!!!");
@@ -28,14 +28,14 @@ public class Main {
             throw new WrongPasswordException();
         }
         for (int j = 0; j < arr.length; j++){
-          if (arr[j]>='A'&& arr[j]<='Z'||arr[j]>='a'&& arr[j]<='z'||arr[j]=='_'||arr[j]>='0' &&arr[j]<='9') {
+          if (password.matches("^\\w*$")) {
+              return true;
             }else {
               throw new WrongPasswordException();
           }
         }
         return false;
     }
-
 
     public static boolean checklogin(String login) throws WrongLoginException {
       //  boolean bool=true;
@@ -44,9 +44,9 @@ public class Main {
             throw new WrongLoginException();
         }
             for (int j = 0; j < arr.length; j++) {
-                if (arr[j]>='A'&& arr[j]<='Z'||arr[j]>='a'&& arr[j]<='z'||arr[j]=='_' ) {
+                if (login.matches("^\\w*$")) {
+                    return true;
                 }else {
-
                     throw new WrongLoginException();
                 }
             }
